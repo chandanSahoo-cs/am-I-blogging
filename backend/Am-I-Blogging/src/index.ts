@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client/edge";
 import { prismaMiddleware } from "./middleware/prismaMiddleware";
 import userRouter from "./routes/user.router";
 import blogRouter from "./routes/blog.router";
+import { cors } from "hono/cors";
 
 const app = new Hono<{
   Bindings: {
@@ -13,6 +14,8 @@ const app = new Hono<{
     prisma: PrismaClient;
   };
 }>();
+
+app.use(cors())
 
 app.use(prismaMiddleware)
 app.route("/api/v1/user",userRouter);
