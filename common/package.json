@@ -1,0 +1,22 @@
+{
+  "name": "@chandansahoo/am-i-blogging",
+  "version": "1.0.1",
+  "description": "A blogging package for Cloudflare Workers",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "zod": "^3.24.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "author": "Chandan Sahoo",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
