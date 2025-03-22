@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="text-xl font-bold text-gray-900">
-              BlogApp
+              BlogWave
             </Link>
           </div>
           

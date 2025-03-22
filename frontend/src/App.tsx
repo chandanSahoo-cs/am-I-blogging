@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Publish from "./pages/Publish";
 import { Toaster } from "sonner";
 import BlogContent from "./pages/BlogContent";
+import Landing from "./pages/Landing";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Toaster position="bottom-right" richColors />
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Landing/>} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/login" element={<Login />} />
