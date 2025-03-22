@@ -49,17 +49,18 @@ const LoginForm: React.FC = () => {
         postInputs
       );
 
+      localStorage.setItem("accessToken", response.data.jwt);
+      toast.success("Account created successfully!");
+      setIsSubmitting(false);
+      setEmail("");
+      setPassword("");
+      navigate("/blog")
       console.log("Response Data:", response.data);
     } catch (error) {
       console.error("Error posting data:", error);
     }
 
     setTimeout(() => {
-      toast.success("Account created successfully!");
-      setIsSubmitting(false);
-      setEmail("");
-      setPassword("");
-      navigate("/blog")
     }, 1500);
   };
 

@@ -48,20 +48,17 @@ const SignupForm: React.FC = () => {
         "https://am-i-blogging.chandansahoo02468.workers.dev/api/v1/user/signup",
         postInputs
       );
-
-      console.log("Response Data:", response.data);
-    } catch (error) {
-      console.error("Error posting data:", error);
-    }
-
-    setTimeout(() => {
       toast.success("Account created successfully!");
       setIsSubmitting(false);
       setname("");
       setEmail("");
       setPassword("");
       navigate("/blog")
-    }, 1500);
+      localStorage.setItem("accessToken", response.data.jwt);
+      console.log("Response Data:", response.data);
+    } catch (error) {
+      console.error("Error posting data:", error);
+    }
   };
 
   const containerVariants = {

@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { BookOpen, Clock, User, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import Navbar from "../components/Navbar";
+
+import { useNavigate } from "react-router-dom";
 
 interface BlogPost {
   id: string;
@@ -9,6 +12,9 @@ interface BlogPost {
   content: string;
   published: boolean;
   authorId: string;
+  author : {
+    name : string
+  }
 }
 
 interface BlogResponse {
@@ -16,17 +22,19 @@ interface BlogResponse {
 }
 
 const Blog = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState<BlogResponse | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken")
     const fetchData = async () => {
       try {
         setIsLoading(true);
         const response = await axios.get<BlogResponse>("https://am-i-blogging.chandansahoo02468.workers.dev/api/v1/blog/entries/bulk",{
           headers : {
-            Authorization : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxZDgxYzM4LWJiZDgtNGQwMC05N2IyLTBkZWEyYTU2ZDU5MyJ9.c5CX4MmHKkezKVFe_5uzppFKEgnLMgxREYgH0oPMwy8'
+            Authorization : accessToken
           }
         });
         setData(response.data);
@@ -89,6 +97,8 @@ const Blog = () => {
   }
 
   return (
+    <>
+    <Navbar/>
     <div className="max-w-screen-xl mx-auto px-4 py-10">
       {/* Header section */}
       <div className="border-b border-gray-200 pb-8 mb-8">
@@ -131,7 +141,7 @@ const Blog = () => {
           animate="visible"
         >
           {data?.posts.map((post) => (
-            <motion.div key={post.id} variants={itemVariants}>
+            <motion.div key={post.id} variants={itemVariants} onClick={()=>{navigate(`/blog/${post.id}`)}}>
               <div className="rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300 h-full flex flex-col bg-white">
                 <div className="p-6 pb-0">
                   <div className="flex items-center mb-2">
@@ -139,7 +149,7 @@ const Blog = () => {
                       <User size={16} className="text-gray-600" />
                     </div>
                     <div>
-                      <span className="text-sm font-medium">{}</span>
+                      <span className="text-sm font-medium">{post.author.name}</span>
                     </div>
                   </div>
                   <h3 className="text-2xl font-bold leading-tight hover:text-blue-600 transition-colors cursor-pointer">
@@ -208,6 +218,7 @@ const Blog = () => {
         </nav>
       </div>
     </div>
+    </>
   );
 };
 

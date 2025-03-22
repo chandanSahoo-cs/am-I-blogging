@@ -1,20 +1,22 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Signin from "./pages/Signin";
 import Blog from "./pages/Blog";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Publish from "./pages/Publish";
+import { Toaster } from "sonner";
+import BlogContent from "./pages/BlogContent";
 
 function App() {
   return (
     <>
+      <Toaster position="bottom-right" richColors />
       <BrowserRouter>
         <Routes>
           <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<Signin />} />
           <Route path="/blog" element={<Blog />} />
-
-          {/* <Route path="/blog/:id" element={<Blog />} /> */}
           <Route path="/login" element={<Login />} />
+          <Route path="/publish" element={<Publish />} />
+          <Route path="/blog/:id" element={<BlogContent />} />
         </Routes>
       </BrowserRouter>
     </>
