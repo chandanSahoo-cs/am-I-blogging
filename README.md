@@ -1,3 +1,5 @@
+## This a test project
+
 # BlogWave
 
 BlogWave is a modern blogging platform that allows users to discover thought-provoking articles and share their own voice with the world.
